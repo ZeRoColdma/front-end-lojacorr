@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../service/auth";
 import logo from "../../assets/logo.png";
 
+import ModalEditUserComponent from "../../components/modal_edit_user/index";
+
 import "./index.css";
 
-export default function SideBar() {
+export default function SideBar(props) {
   const history = useHistory();
+  const [id, setId] = useState("");
+
+  useEffect(() => {
+    setId(props.userId);
+    console.log(id);
+  }, []);
 
   async function exitLogout() {
     logout();
@@ -20,6 +28,10 @@ export default function SideBar() {
       </p>
 
       <footer>
+        <div>
+          <ModalEditUserComponent idUser={id} />
+        </div>
+        <br />
         <button type="button" onClick={exitLogout}>
           Logout
         </button>

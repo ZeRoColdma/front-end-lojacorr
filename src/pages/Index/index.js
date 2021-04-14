@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../../components/sidebar/index";
+import "./index.css";
 
 import ModalComponent from "../../components/modal_insert/index";
 import ModalEditComponent from "../../components/modal_edit/index";
@@ -11,7 +12,8 @@ export default function IndexPage(props) {
   let [dataIndex, setDataIndex] = useState([]);
   useEffect(() => {
     dataCeps();
-    setIdFromUser(props.location.state.idFromUser);
+    setIdFromUser(props.location.state.idUser);
+    console.log(idFromUser);
   }, []);
 
   async function dataCeps() {
@@ -30,15 +32,18 @@ export default function IndexPage(props) {
   return (
     <>
       <div className="app">
-        <SideBar />
+        <SideBar
+          userId={idFromUser}
+          className="col-12 col-md-3 col-xl-2 bd-sidebar"
+        />
       </div>
 
       <div className="container">
         <div className="row">
-          <div className="col-sm">
+          <div className="col-xl">
             <ModalComponent inserCep={dataCeps} />
-            <div className="table-responsive-sm tableContainerClients">
-              <table className="table table-hover table-lg">
+            <div className="table-wrapper-scroll-y my-custom-scrollbar">
+              <table className="table table-hover mb-0">
                 <tbody>
                   <tr className="thead-dark">
                     <th>Cep</th>
@@ -72,7 +77,7 @@ export default function IndexPage(props) {
                         />
                         <div style={{ display: "flex", margin: "10px" }}></div>
                         <button
-                          className="btn btn-danger botao"
+                          className="btn btn-danger"
                           onClick={(event) => handleDelete(data.id, event)}
                         >
                           Deletar
