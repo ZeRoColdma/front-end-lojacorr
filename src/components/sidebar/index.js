@@ -3,8 +3,6 @@ import { useHistory } from "react-router-dom";
 import { logout } from "../../service/auth";
 import logo from "../../assets/logo.png";
 
-import ModalEditUserComponent from "../../components/modal_edit_user/index";
-
 import "./index.css";
 
 export default function SideBar(props) {
@@ -14,7 +12,15 @@ export default function SideBar(props) {
   useEffect(() => {
     setId(props.userId);
     console.log(id);
-  }, []);
+  }, [id]);
+
+  async function moveToUserIndex() {
+    history.push("/indexusers");
+  }
+
+  async function moveToUserIndexCeps() {
+    history.push("/index");
+  }
 
   async function exitLogout() {
     logout();
@@ -29,8 +35,19 @@ export default function SideBar(props) {
 
       <footer>
         <div>
-          <ModalEditUserComponent idUser={id} />
+          <button onClick={moveToUserIndexCeps} type="button">
+            Lista de Ceps
+          </button>
         </div>
+
+        <br />
+
+        <div>
+          <button onClick={moveToUserIndex} type="button">
+            Lista de usuarios
+          </button>
+        </div>
+
         <br />
         <button type="button" onClick={exitLogout}>
           Logout

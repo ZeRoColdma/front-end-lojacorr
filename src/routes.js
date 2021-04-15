@@ -4,6 +4,7 @@ import React from "react";
 import LoginPage from "../src/pages/Login/index";
 import Index from "../src/pages/Index/index";
 import Register from "../src/pages/Register/index";
+import IndexUsers from "../src/pages/index_users/index";
 
 import { isAuthenticated } from "./service/auth";
 
@@ -27,6 +28,7 @@ export default function Routes() {
         <Route path="/" exact component={LoginPage} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/index" component={Index} />
+        <PrivateRoute path="/indexusers" component={IndexUsers} />
       </Switch>
     </BrowserRouter>
   );

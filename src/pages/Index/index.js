@@ -10,11 +10,11 @@ import api from "../../service/api";
 export default function IndexPage(props) {
   let [idFromUser, setIdFromUser] = useState("");
   let [dataIndex, setDataIndex] = useState([]);
+
   useEffect(() => {
     dataCeps();
     setIdFromUser(props.location.state.idUser);
-    console.log(idFromUser);
-  }, []);
+  }, [idFromUser]);
 
   async function dataCeps() {
     const clientList = await api.get(`/cep`);

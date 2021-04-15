@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Container } from "react-bootstrap";
 
 import api from "../../service/api";
 
 export default function ModalEditUserComponent(props) {
   const [show, setShow] = useState(false);
-
   const [id, setId] = useState("");
+
+  useEffect(() => {
+    setId(props.idUser);
+  }, [id]);
 
   let [username, setUserName] = useState("");
   let [email, setEmail] = useState("");
@@ -15,7 +18,11 @@ export default function ModalEditUserComponent(props) {
   const handleClose = () => setShow(false);
 
   async function handleShow() {
-    const userEdit = await api.get(`/users/${props.idUser}`);
+    // console.log("Usuario da Lista");
+    // console.log(props.idUser);
+    // console.log("Usuario da Lista");
+
+    const userEdit = await api.get(`/users/${id}`);
     setId(props.idUser);
     setUserName(userEdit.data["username"]);
     setEmail(userEdit.data["email"]);
@@ -25,16 +32,15 @@ export default function ModalEditUserComponent(props) {
 
   async function handleSubmitEdit(id, event) {
     event.preventDefault();
-    console.log(username, email, password);
     try {
       let data = {
         username,
         email,
         password,
       };
-      console.log(data);
       await api.put(`/users/${id}`, data);
       handleClose();
+      props.resetIndex();
     } catch (error) {
       alert("Email ja registrado!");
     }
@@ -42,7 +48,7 @@ export default function ModalEditUserComponent(props) {
 
   return (
     <>
-      <button className="buttonOfEdit" onClick={handleShow}>
+      <button className="btn btn-warning" onClick={handleShow}>
         Editar Usuario
       </button>
 

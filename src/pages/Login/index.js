@@ -20,7 +20,7 @@ export default function LoginPage() {
       login(data.data.token.token);
       api.defaults.headers["Authorization"] = `Bearer ${token.token}`;
       history.push({
-        pathname: `/index/${data.data.user_id}`,
+        pathname: `/index/`,
         state: { idUser: data.data.user_id },
       });
     } catch (error) {
