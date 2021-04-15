@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Container } from "react-bootstrap";
+import { Modal, Form, Container } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 
 import api from "../../service/api";
 
@@ -64,7 +65,7 @@ export default function ModalEditComponent(props) {
 
   return (
     <>
-      <Button className="botao" variant="warning" onClick={handleShow}>
+      <Button variant="contained" color="primary" onClick={handleShow}>
         Editar
       </Button>
 
@@ -166,11 +167,14 @@ export default function ModalEditComponent(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
+          <Button variant="contained" color="secondary" onClick={handleClose}>
             Fechar
           </Button>
+          <br />
           <Button
-            variant="primary"
+            style={{ margin: "15px" }}
+            variant="contained"
+            color="primary"
             onClick={(event) => handleSubmitEdit(id, event)}
           >
             Salvar

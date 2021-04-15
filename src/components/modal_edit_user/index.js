@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Container } from "react-bootstrap";
+import { Modal, Form, Container } from "react-bootstrap";
+import Button from "@material-ui/core/Button";
 
 import api from "../../service/api";
 
@@ -18,10 +19,6 @@ export default function ModalEditUserComponent(props) {
   const handleClose = () => setShow(false);
 
   async function handleShow() {
-    // console.log("Usuario da Lista");
-    // console.log(props.idUser);
-    // console.log("Usuario da Lista");
-
     const userEdit = await api.get(`/users/${id}`);
     setId(props.idUser);
     setUserName(userEdit.data["username"]);
@@ -48,9 +45,9 @@ export default function ModalEditUserComponent(props) {
 
   return (
     <>
-      <button className="btn btn-warning" onClick={handleShow}>
+      <Button variant="contained" color="primary" onClick={handleShow}>
         Editar Usuario
-      </button>
+      </Button>
 
       <Modal
         show={show}
@@ -94,11 +91,17 @@ export default function ModalEditUserComponent(props) {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
+          <Button
+            style={{ margin: "15px" }}
+            variant="contained"
+            color="secondary"
+            onClick={handleClose}
+          >
             Fechar
           </Button>
           <Button
-            variant="primary"
+            variant="contained"
+            color="primary"
             onClick={(event) => handleSubmitEdit(id, event)}
           >
             Salvar
