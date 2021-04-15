@@ -19,7 +19,10 @@ export default function SideBar(props) {
   }
 
   async function moveToUserIndexCeps() {
-    history.push("/index");
+    history.push({
+      pathname: `/index/`,
+      state: { idUser: id },
+    });
   }
 
   async function exitLogout() {
